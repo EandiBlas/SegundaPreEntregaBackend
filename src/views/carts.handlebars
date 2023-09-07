@@ -1,0 +1,16 @@
+<div id="containerCart">
+    {{#each carritofound}}
+        <div class="card">
+            <img src = "{{_id.thumbnail}}" class="card-img-top imgshop" alt = "{{_id.title}}">
+            <div>
+                <h5 class="card-title mytitulo">{{_id.title}}</h5>
+                <p class="card-text mydescripcion">Categoria: {{_id.category}}</p>
+                <p class="card-text mydescripcion">ID:{{_id._id}}</p>
+                <p class="card-text mydescripcion">Info: {{_id.description}}</p>
+                <p class="card-text mydescripcion">Price:  ${{_id.price}}</p>
+                <p class="card-text mydescripcion">Quantity: {{quantity}}</p>
+            </div>
+        </div>
+    {{/each}}
+</div>
+<!--cuando es sin _id es que no esta dentro de products--!>

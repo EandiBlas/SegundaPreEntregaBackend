@@ -1,35 +1,44 @@
-// const socketClient = io()
+const socketClient = io();
 
+socketClient.on('enviodecarts', (obj) => {
+    cartId = obj._id;
+});
 
-// socketClient.on("enviodecarts", (obj) => {
-//     updateCartList(obj)
-// })
+socketClient.on('enviodeproducts', (obj) => {
+    updateProductList(obj);
+});
 
+    function updateProductList(products) {
 
-// function updateCartList(products) {
-//     let div = document.getElementById("contenedor");
-//     let productos = "";
+        let div = document.getElementById('contenedor');
 
-//     products.forEach((product) => {
-//         productos += `
-//         <div class="card">
-//             <img src ="${product.thumbnail}" class="card-img-top imgshop">
-//             <div>
-//                 <h5 class="card-title mytitulo">${product.title}</h5>
-//                 <p class="card-text mydescripcion">Categoria: ${product.category}</p>
-//                 <p class="card-text mydescripcion">ID:${product._id}</p>
-//                 <p class="card-text mydescripcion">Info: ${product.description}</p>
-//                 <p class="card-text mydescripcion">$${product.price}</p>
-//                 <buttton class="btn mx-auto d-block mybutton" id="boton${product._id}"><i class="fas fa-cart-plus"></i> Añadir al carrito </button>
-//             </div>
-//         </div>
-//           `;
-//     });
+        div.innerHTML = products.map(product => {
+            return `<div class="card" style="width: 18rem;">
+            <img src="${product.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${product.title}</h5>
+            <p class="card-text">${product.price}</p>
+            <a href="#" class="btn btn-primary" onclick="addToCart('${product._id}')">Agregar al carrito</a>
+            </div>
+        </div>`
+        })
 
-//     div.innerHTML = productos;
-// }
+    }
 
-// const boton = document.getElementById("boton${product._id}");
-// boton.addEventListener("click", () => {
-//     addCart(addCart.product._id);
-// })
+    function addToCart(productId) {
+
+        socketClient.emit('addCart', {
+            _id: cartId,
+            products: [{ _id: productId }],
+        });
+
+    }
+
+    function addToCart(productId) {
+
+        socketClient.emit('addCart', {
+            _id: cartId,
+            products: [{ _id: productId }],
+        });
+
+    }
